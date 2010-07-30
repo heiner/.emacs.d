@@ -61,5 +61,15 @@
 
 (setq column-number-mode t)
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
 (add-to-list 'load-path "~/.emacs.d/heiner")
 (load "xemacs-colors")
+
+;; from http://wttools.sourceforge.net/emacs-stuff/emacs.html
+(require 'pager)
+(global-set-key "\C-v"	   'pager-page-down)
+(global-set-key [next] 	   'pager-page-down)
+(global-set-key "\ev"	   'pager-page-up)
+(global-set-key [prior]	   'pager-page-up)
+(global-set-key '[M-up]    'pager-row-up)
+(global-set-key '[M-kp-8]  'pager-row-up)
