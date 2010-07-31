@@ -73,3 +73,5 @@
 (global-set-key [prior]	   'pager-page-up)
 (global-set-key '[M-up]    'pager-row-up)
 (global-set-key '[M-kp-8]  'pager-row-up)
+
+(setq frame-title-format "emacs: %b")
