@@ -75,3 +75,18 @@
 (global-set-key '[M-kp-8]  'pager-row-up)
 
 (setq frame-title-format "emacs: %b")
+
+;; Have 50 rows and 84 columns now (works for my font/monitor)
+;; This does not work?!
+(setq initial-frame-alist
+      `((width . 84) (height . 60)))
+
+(load "latex-devel")
+
+(defun make-in-background ()
+  "Executes a \"make\" in the current directory"
+  (interactive)
+  (compile "make -k")
+  (delete-other-windows))
+
+(define-key global-map [(f4)] 'make-in-background)
