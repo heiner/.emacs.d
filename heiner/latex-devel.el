@@ -3,6 +3,10 @@
 (require 'filladapt)
 ;(pending-delete-mode t)
 ;(autoload 'latex-mode "auc-tex" "Mode for LaTeX" t)
+
+(defconst latex-command "pdflatex"
+  "Command to run LaTeX")
+
 (add-hook 'latex-mode-hook
 	  (lambda ()
 	    (abbrev-mode t)
@@ -108,10 +112,24 @@
 	    (define-key latex-mode-map [(meta m)(?1)]
 	      '(lambda () (interactive)
 	      (insert "^{-1}")))
-	    (define-key latex-mode-map [(f8)]
-	      '(lambda () (interactive)
-		 (insert "{}")
-		 (backward-char)))
+	    ;; (define-key latex-mode-map [(f8)]
+	    ;;   '(lambda () (interactive)
+	    ;;      (insert "{}")
+	    ;;      (backward-char)))
+            (define-key latex-mode-map [(f8)]
+              '(lambda () (interactive)
+                 (if (region-active-p)
+                     (let ((content (buffer-substring-no-properties
+                                     (region-beginning) (region-end)))
+                           (beg (point)))
+                       (delete-region (region-beginning) (region-end))
+                       (insert (concat "{" content "}"))
+                       (goto-char (+ beg 1)))
+                   (insert "{}")
+                   (backward-char))))
+            (define-key latex-mode-map [(f4)]
+              '(lambda () (interactive)
+                 (compile (concat latex-command " " buffer-file-name))))
 
 	    ;; compare amsldoc.pdf, 4.3 (PDF page 16/17)
 	    (define-key latex-mode-map [(meta m)(?.)(?,)]
