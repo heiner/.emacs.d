@@ -129,7 +129,9 @@
                    (backward-char))))
             (define-key latex-mode-map [(f4)]
               '(lambda () (interactive)
-                 (compile (concat latex-command " " buffer-file-name))))
+                 (save-buffer)
+                 (compile (concat latex-command " " buffer-file-name))
+                 (delete-other-windows)))
 
 	    ;; compare amsldoc.pdf, 4.3 (PDF page 16/17)
 	    (define-key latex-mode-map [(meta m)(?.)(?,)]
