@@ -254,9 +254,25 @@
 
 (defun heiner-latex-insert-environment (env)
   "Insert environment env the right way"
-  (let ((ws (make-string (current-column) ? )))
-    (insert (format "\\begin{%s}\n%s  \n%s\\end{%s}" env ws ws env))
-    (end-of-previous-line)))
+  (if (region-active-p)
+      (let ((content (buffer-substring-no-properties
+                      (region-beginning) (region-end)))
+            (origin (point))
+            (was-beginning (= (point) (region-beginning))))
+        (delete-region (region-beginning) (region-end))
+
+        (let ((ibegin (point)))
+          (insert (concat "\\begin{" env "}\n" content "\\end{" env "}"))
+          (indent-region ibegin (point)))
+        (goto-char origin)
+        (if was-beginning
+            (progn
+              (next-line)
+              (skip-chars-forward " "))
+          (end-of-line)))
+    (insert (concat "\\begin{" env "}\n\n\\end{" env "}"))
+    (previous-line 1)
+    (indent-for-tab-command)))
 
 (defun heiner-latex-insert-math-display ()
   "Insert \[ \] the right way"
