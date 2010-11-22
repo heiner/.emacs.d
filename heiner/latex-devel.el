@@ -22,11 +22,11 @@
 
    (define-key latex-mode-map [(meta m)(m)]
      '(lambda () (interactive)
-        (heiner-enclose-by  "$" "$")))
+        (heiner-enclose-by "$" "$")))
 
    (define-key latex-mode-map [(meta m)(f)]
      '(lambda () (interactive)
-        (heiner-enclose-by  "\\frac{" "}{}")))
+        (heiner-enclose-by "\\frac{" "}{}")))
 
    (define-key latex-mode-map [(f5)]
      '(lambda () (interactive)
@@ -35,7 +35,8 @@
 
    (define-key latex-mode-map [(f6)]
      '(lambda () (interactive)
-        (heiner-latex-insert-command (read-from-minibuffer "Command: "))))
+        (heiner-latex-insert-command
+         (read-from-minibuffer "Command: "))))
 
    (define-key latex-mode-map [(f7)]
      'heiner-latex-insert-math-display)
@@ -73,7 +74,7 @@
 
     (define-key latex-mode-map [(meta m)(r)]
       '(lambda () (interactive)
-         (heiner-enclose-by  "\\sqrt[" "]{}")))
+         (heiner-enclose-by "\\sqrt[]{" "}")))
 
     (define-key latex-mode-map [(meta m)(?8)]
       '(lambda () (interactive)
@@ -274,13 +275,20 @@
     (previous-line 1)
     (indent-for-tab-command)))
 
-(defun heiner-latex-insert-math-display ()
+(defun heiner-latex-insert-math-display-old ()
   "Insert \[ \] the right way"
   (interactive)
   (let ((ws (make-string (current-column) ? )))
     (insert (format "\\[\n%s  \n%s\\]" ws ws))
     (end-of-previous-line)))
 (put 'heiner-latex-insert-math-display 'pending-delete t)
+
+;; Fix this next function
+(defun heiner-latex-insert-math-display ()
+  "Insert \[ \] the right way"
+  (interactive)
+  (let ((ws (make-string (current-column) ? )))
+    (heiner-enclose-by (concat "\\[\n  " ws) (concat "\n" ws "\\]"))))
 
 (defun heiner-enclose-by (open close)
   "Insert open und close around the highlighted region"
@@ -292,7 +300,7 @@
         (insert (concat open content close))
         (goto-char (+ origin (length open))))
     (insert (concat open close))
-    (backward-char)))
+    (backward-char (length close))))
 
 (defun heiner-latex-insert-command (cmd)
   "Insert command cmd the right way"
