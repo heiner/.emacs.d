@@ -11,6 +11,8 @@
       (setq cursor-type '(bar . 4))
     (setq cursor-type 'box)))
 
+(setq cursor-in-non-selected-windows 'hollow)
+
 (add-hook 'post-command-hook 'heiner-xemacs-like-cursor)
 
 (setq show-paren-delay 0)
@@ -82,6 +84,7 @@
       `((width . 84) (height . 60)))
 
 (load "latex-devel")
+(load "lilypond-devel")
 
 (defun make-in-background ()
   "Executes a \"make\" in the current directory"
@@ -90,3 +93,9 @@
   (delete-other-windows))
 
 (define-key global-map [(f4)] 'make-in-background)
+
+;(load "nxhtml/autostart.el")
+(require 'mediawiki)
+
+(if (file-exists-p "heiner/passwords.el")
+    (load "passwords"))

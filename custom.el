@@ -7,6 +7,7 @@
  '(initial-buffer-choice t)
  '(kill-do-not-save-duplicates t)
  '(mouse-yank-at-point t)
+ '(quack-default-program "mit-scheme")
  '(scroll-bar-mode (quote right))
  '(show-paren-delay 0)
  '(show-paren-mode t)

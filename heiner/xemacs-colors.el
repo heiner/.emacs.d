@@ -14,6 +14,7 @@
 
       (hl-line ((t (:background "#FF0000"))))
       (mode-line ((t (:foreground "#000000" :background "#E0DFD8"))))
+      (mode-line-inactive ((t (:foreground "#999999" :background "#E0DFD8"))))
       (mode-line-buffer-id ((t (:background "#E0DFD8" :foreground "firebrick4"))))
       (region ((t (:foreground nil :background "gray80"))))
       (show-paren-match-face ((t (:bold t :background "darkseagreen2"))))
@@ -46,7 +47,6 @@
       ;; (isearch-lazy-highlight-face ((t (:foreground "#080808" :background "#2e3436"))))
 
      ;; ;; Emacs Interface
-     ;; (mode-line-inactive ((t (:background "#1f1f1f" :foreground "#888a85"))))
      ;; (minibuffer-prompt ((t (:foreground "#729fcf")))) ; light sky blue
 
      ;; ;; Line highlighting
