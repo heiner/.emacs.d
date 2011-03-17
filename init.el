@@ -11,8 +11,6 @@
       (setq cursor-type '(bar . 4))
     (setq cursor-type 'box)))
 
-(setq cursor-in-non-selected-windows 'hollow)
-
 (add-hook 'post-command-hook 'heiner-xemacs-like-cursor)
 
 (setq show-paren-delay 0)
@@ -99,3 +97,8 @@
 
 (if (file-exists-p "heiner/passwords.el")
     (load "passwords"))
+
+(define-key global-map [(meta backspace)] 'backward-kill-word)
+
+;; "Wie es sich für einen PC gehört."
+(pc-selection-mode)

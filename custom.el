@@ -4,6 +4,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
+ '(cursor-in-non-selected-windows nil)
  '(initial-buffer-choice t)
  '(kill-do-not-save-duplicates t)
  '(mouse-yank-at-point t)
