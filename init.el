@@ -93,7 +93,7 @@
 (define-key global-map [(f4)] 'make-in-background)
 
 ;(load "nxhtml/autostart.el")
-(require 'mediawiki)
+;(require 'mediawiki)
 
 (if (file-exists-p "heiner/passwords.el")
     (load "passwords"))
