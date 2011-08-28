@@ -221,3 +221,8 @@
 (add-to-list 'package-archives
 	     '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize)
+
+;; include nyan-mode from https://github.com/TeMPOraL/nyan-mode.git
+(add-to-list 'load-path "~/.emacs.d/nyan-mode")
+(require 'nyan-mode)
+
