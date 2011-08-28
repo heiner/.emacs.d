@@ -224,4 +224,4 @@
 ;; include nyan-mode from https://github.com/TeMPOraL/nyan-mode.git
 (add-to-list 'load-path "~/.emacs.d/nyan-mode")
 (require 'nyan-mode)
-
+(nyan-mode)
