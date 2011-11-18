@@ -1,6 +1,7 @@
 ;;;; Heiner's emacs init file, ~/.emacs.d/init.el
-;;;; Written for GNU Emacs 23.1.50.1 (i486-pc-linux-gnu, GTK+ Version 2.18.0)
-;;;; of 2009-09-27 on palmer, modified by Debian
+;;;; Written for
+;;;; * GNU Emacs 23.2.1 (x86_64-pc-linux-gnu, GTK+ Version 2.20.1)
+;;;; * GNU Emacs 23.1.50.1 (i486-pc-linux-gnu, GTK+ Version 2.18.0)
 
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
@@ -93,7 +94,7 @@
 (define-key global-map [(f4)] 'make-in-background)
 
 ;(load "nxhtml/autostart.el")
-(require 'mediawiki)
+;(require 'mediawiki)
 
 (if (file-exists-p "heiner/passwords.el")
     (load "passwords"))
@@ -102,3 +103,15 @@
 
 ;; "Wie es sich für einen PC gehört."
 (pc-selection-mode)
+
+;;(setq visible-bell 0)
+(setq ring-bell-function 'ignore) ; no alarm at all
+
+;; (setq ring-bell-function
+;;       (lambda ()
+;; 	(unless (memq this-command
+;; 		      '(isearch-abort
+;;                         abort-recursive-edit
+;;                         exit-minibuffer
+;;                         keyboard-quit))
+;; 	  (message-box (symbol-name this-command)))))

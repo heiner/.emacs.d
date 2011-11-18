@@ -10,119 +10,119 @@
   "Command to run LaTeX")
 
 (add-hook
- 'latex-mode-hook
+ 'LaTeX-mode-hook
  (lambda ()
    (abbrev-mode t)
    (font-lock-mode t)
    (turn-on-auto-fill)
    (filladapt-mode t)
 
-   (define-key latex-mode-map "\"" 'self-insert-command)
+   (define-key LaTeX-mode-map "\"" 'self-insert-command)
 
-   (define-key latex-mode-map [(meta ?.)]
+   (define-key LaTeX-mode-map [(meta ?.)]
      '(lambda () (interactive) (insert "\\dotsc")))
 
-   (define-key latex-mode-map [(meta m)(m)]
+   (define-key LaTeX-mode-map [(meta m)(m)]
      '(lambda () (interactive)
         (heiner-enclose-by "$" "$")))
 
-   (define-key latex-mode-map [(meta m)(f)]
+   (define-key LaTeX-mode-map [(meta m)(f)]
      '(lambda () (interactive)
         (heiner-enclose-by "\\frac{" "}{}")))
 
-   (define-key latex-mode-map [(f5)]
+   (define-key LaTeX-mode-map [(f5)]
      '(lambda () (interactive)
         (heiner-latex-insert-environment
          (read-from-minibuffer "Environment: "))))
 
-   (define-key latex-mode-map [(f6)]
+   (define-key LaTeX-mode-map [(f6)]
      '(lambda () (interactive)
         (heiner-latex-insert-command
          (read-from-minibuffer "Command: "))))
 
-   (define-key latex-mode-map [(f7)]
+   (define-key LaTeX-mode-map [(f7)]
      'heiner-latex-insert-math-display)
 
-   (define-key latex-mode-map [(meta m)(d)]
+   (define-key LaTeX-mode-map [(meta m)(d)]
      'heiner-latex-insert-math-display)
 
-   (define-key latex-mode-map [(meta m)(1)]
+   (define-key LaTeX-mode-map [(meta m)(1)]
      '(lambda () (interactive)
         (insert "^{-1}")))
 
-   (define-key latex-mode-map [(meta m)(<)]
+   (define-key LaTeX-mode-map [(meta m)(<)]
      '(lambda () (interactive)
         (heiner-latex-insert-command "angles")))
 
-   (define-key latex-mode-map [(meta m)(~)]
+   (define-key LaTeX-mode-map [(meta m)(~)]
      '(lambda () (interactive)
         (heiner-latex-insert-command "tilde")))
 
-   (define-key latex-mode-map [(meta m)(|)]
+   (define-key LaTeX-mode-map [(meta m)(|)]
      '(lambda () (interactive)
         (heiner-latex-insert-command "abs")))
 
-   (define-key latex-mode-map [(meta m)(brokenbar)]
+   (define-key LaTeX-mode-map [(meta m)(brokenbar)]
      '(lambda () (interactive)
         (heiner-latex-insert-command "norm")))
 
-    (define-key latex-mode-map [(meta m)({)]
+    (define-key LaTeX-mode-map [(meta m)({)]
       '(lambda () (interactive)
          (heiner-latex-insert-command "bigbraces")))
 
-    (define-key latex-mode-map [(meta m)(s)]
+    (define-key LaTeX-mode-map [(meta m)(s)]
       '(lambda () (interactive)
          (heiner-latex-insert-command "sqrt")))
 
-    (define-key latex-mode-map [(meta m)(r)]
+    (define-key LaTeX-mode-map [(meta m)(r)]
       '(lambda () (interactive)
          (heiner-enclose-by "\\sqrt[]{" "}")))
 
-    (define-key latex-mode-map [(meta m)(?8)]
+    (define-key LaTeX-mode-map [(meta m)(?8)]
       '(lambda () (interactive)
          (insert "\\infty")))
 
-    (define-key latex-mode-map [(meta m)(?\\)]
+    (define-key LaTeX-mode-map [(meta m)(?\\)]
       '(lambda () (interactive)
          (insert "\\setminus")))
 
-    (define-key latex-mode-map [(meta m)(?\()]
+    (define-key LaTeX-mode-map [(meta m)(?\()]
       '(lambda () (interactive)
          (heiner-latex-insert-command "Bigparens")))
 
-    (define-key latex-mode-map [(meta m)(p)]
+    (define-key LaTeX-mode-map [(meta m)(p)]
       '(lambda () (interactive)
          (insert "\\partial")))
 
-    (define-key latex-mode-map [(meta m)(n)]
+    (define-key LaTeX-mode-map [(meta m)(n)]
       '(lambda () (interactive)
          (insert "\\nabla")))
 
-    (define-key latex-mode-map [(meta m)(x)]
+    (define-key LaTeX-mode-map [(meta m)(x)]
       '(lambda () (interactive)
          (insert "\\times")))
 
-    (define-key latex-mode-map [(meta m)(o)]
+    (define-key LaTeX-mode-map [(meta m)(o)]
       '(lambda () (interactive)
          (insert "\\otimes")))
 
-    (define-key latex-mode-map [(meta m)(^)]
+    (define-key LaTeX-mode-map [(meta m)(^)]
       '(lambda () (interactive)
          (heiner-latex-insert-command "hat")))
 
-    (define-key latex-mode-map [(meta m)(_)]
+    (define-key LaTeX-mode-map [(meta m)(_)]
       '(lambda () (interactive)
          (heiner-latex-insert-command "overline")))
 
-    (define-key latex-mode-map [(meta m)(?1)]
+    (define-key LaTeX-mode-map [(meta m)(?1)]
       '(lambda () (interactive)
          (insert "^{-1}")))
 
-    (define-key latex-mode-map [(f8)]
+    (define-key LaTeX-mode-map [(f8)]
       '(lambda () (interactive)
          (heiner-enclose-by "{" "}")))
 
-    (define-key latex-mode-map [(f4)]
+    (define-key LaTeX-mode-map [(f4)]
       ;; this works great, except in the case or compilation errors ...
       '(lambda () (interactive)
          (save-buffer)
@@ -130,124 +130,124 @@
          (delete-other-windows)))
 
     ;; compare amsldoc.pdf, 4.3 (PDF page 16/17)
-    (define-key latex-mode-map [(meta m)(?.)(?,)]
+    (define-key LaTeX-mode-map [(meta m)(?.)(?,)]
       '(lambda () "dots with commas"
          (interactive)
          (insert "\\dotsc")))
-    (define-key latex-mode-map [(meta m)(?.)(?b)]
+    (define-key LaTeX-mode-map [(meta m)(?.)(?b)]
       '(lambda () "dots with binary operators/relations"
          (interactive)
          (insert "\\dotsb")))
-    (define-key latex-mode-map [(meta m)(?.)(?+)]
+    (define-key LaTeX-mode-map [(meta m)(?.)(?+)]
       '(lambda () "dots with binary operators/relations"
          (interactive)
          (insert "\\dotsb")))
-    (define-key latex-mode-map [(meta m)(?.)(m)]
+    (define-key LaTeX-mode-map [(meta m)(?.)(m)]
       '(lambda () "multiplication dots"
          (interactive)
          (insert "\\dotsm")))
-    (define-key latex-mode-map [(meta m)(?.)(i)]
+    (define-key LaTeX-mode-map [(meta m)(?.)(i)]
       '(lambda () "dots with integrals"
          (interactive)
          (insert "\\dotsi")))
-    (define-key latex-mode-map [(meta m)(?.)(o)]
+    (define-key LaTeX-mode-map [(meta m)(?.)(o)]
       '(lambda () "other dots"
          (interactive)
          (insert "\\dotso")))
 
-    (define-key latex-mode-map [(meta m)(?.)(?.)]
+    (define-key LaTeX-mode-map [(meta m)(?.)(?.)]
       '(lambda () "central dot"
          (interactive)
          (insert "\\cdot")))
 
-    (define-key latex-mode-map [(meta m)(g)(a)]
+    (define-key LaTeX-mode-map [(meta m)(g)(a)]
       '(lambda () (interactive) (insert "\\alpha")))
-    (define-key latex-mode-map [(meta m)(g)(b)]
+    (define-key LaTeX-mode-map [(meta m)(g)(b)]
       '(lambda () (interactive) (insert "\\beta")))
-    (define-key latex-mode-map [(meta m)(g)(c)]
+    (define-key LaTeX-mode-map [(meta m)(g)(c)]
       '(lambda () (interactive) (insert "\\chi")))
-    (define-key latex-mode-map [(meta m)(g)(d)]
+    (define-key LaTeX-mode-map [(meta m)(g)(d)]
       '(lambda () (interactive) (insert "\\delta")))
-    (define-key latex-mode-map [(meta m)(g)(e)]
+    (define-key LaTeX-mode-map [(meta m)(g)(e)]
       '(lambda () (interactive) (insert "\\varepsilon")))
-    (define-key latex-mode-map [(meta m)(g)(f)]
+    (define-key LaTeX-mode-map [(meta m)(g)(f)]
       '(lambda () (interactive) (insert "\\varphi")))
-    (define-key latex-mode-map [(meta m)(g)(g)]
+    (define-key LaTeX-mode-map [(meta m)(g)(g)]
       '(lambda () (interactive) (insert "\\gamma")))
-    (define-key latex-mode-map [(meta m)(g)(h)]
+    (define-key LaTeX-mode-map [(meta m)(g)(h)]
       '(lambda () (interactive) (insert "\\eta")))
-    (define-key latex-mode-map [(meta m)(g)(i)]
+    (define-key LaTeX-mode-map [(meta m)(g)(i)]
       '(lambda () (interactive) (insert "\\iota")))
-    (define-key latex-mode-map [(meta m)(g)(j)]
+    (define-key LaTeX-mode-map [(meta m)(g)(j)]
       '(lambda () (interactive) (insert "\\phi")))
-    (define-key latex-mode-map [(meta m)(g)(k)]
+    (define-key LaTeX-mode-map [(meta m)(g)(k)]
       '(lambda () (interactive) (insert "\\kappa")))
-    (define-key latex-mode-map [(meta m)(g)(l)]
+    (define-key LaTeX-mode-map [(meta m)(g)(l)]
       '(lambda () (interactive) (insert "\\lambda")))
-    (define-key latex-mode-map [(meta m)(g)(m)]
+    (define-key LaTeX-mode-map [(meta m)(g)(m)]
       '(lambda () (interactive) (insert "\\mu")))
-    (define-key latex-mode-map [(meta m)(g)(n)]
+    (define-key LaTeX-mode-map [(meta m)(g)(n)]
       '(lambda () (interactive) (insert "\\nu")))
-    (define-key latex-mode-map [(meta m)(g)(o)]
+    (define-key LaTeX-mode-map [(meta m)(g)(o)]
       '(lambda () (interactive) (insert "\\omega")))
-    (define-key latex-mode-map [(meta m)(g)(p)]
+    (define-key LaTeX-mode-map [(meta m)(g)(p)]
       '(lambda () (interactive) (insert "\\pi")))
-    (define-key latex-mode-map [(meta m)(g)(q)]
+    (define-key LaTeX-mode-map [(meta m)(g)(q)]
       '(lambda () (interactive) (insert "\\vartheta")))
-    (define-key latex-mode-map [(meta m)(g)(r)]
+    (define-key LaTeX-mode-map [(meta m)(g)(r)]
       '(lambda () (interactive) (insert "\\rho")))
-    (define-key latex-mode-map [(meta m)(g)(s)]
+    (define-key LaTeX-mode-map [(meta m)(g)(s)]
       '(lambda () (interactive) (insert "\\sigma")))
-    (define-key latex-mode-map [(meta m)(g)(t)]
+    (define-key LaTeX-mode-map [(meta m)(g)(t)]
       '(lambda () (interactive) (insert "\\tau")))
-    (define-key latex-mode-map [(meta m)(g)(u)]
+    (define-key LaTeX-mode-map [(meta m)(g)(u)]
       '(lambda () (interactive) (insert "\\upsilon")))
-    (define-key latex-mode-map [(meta m)(g)(v)]
+    (define-key LaTeX-mode-map [(meta m)(g)(v)]
       '(lambda () (interactive) (insert "\\theta")))
-    (define-key latex-mode-map [(meta m)(g)(w)]
+    (define-key LaTeX-mode-map [(meta m)(g)(w)]
       '(lambda () (interactive) (insert "\\omega")))
-    (define-key latex-mode-map [(meta m)(g)(x)]
+    (define-key LaTeX-mode-map [(meta m)(g)(x)]
       '(lambda () (interactive) (insert "\\xi")))
-    (define-key latex-mode-map [(meta m)(g)(y)]
+    (define-key LaTeX-mode-map [(meta m)(g)(y)]
       '(lambda () (interactive) (insert "\\psi")))
-    (define-key latex-mode-map [(meta m)(g)(z)]
+    (define-key LaTeX-mode-map [(meta m)(g)(z)]
       '(lambda () (interactive) (insert "\\zeta")))
 
-    (define-key latex-mode-map [(meta m)(g)(D)]
+    (define-key LaTeX-mode-map [(meta m)(g)(D)]
       '(lambda () (interactive) (insert "\\Delta")))
-    (define-key latex-mode-map [(meta m)(g)(E)]
+    (define-key LaTeX-mode-map [(meta m)(g)(E)]
       '(lambda () (interactive) (insert "\\epsilon")))
-    (define-key latex-mode-map [(meta m)(g)(F)]
+    (define-key LaTeX-mode-map [(meta m)(g)(F)]
       '(lambda () (interactive) (insert "\\Phi")))
-    (define-key latex-mode-map [(meta m)(g)(G)]
+    (define-key LaTeX-mode-map [(meta m)(g)(G)]
       '(lambda () (interactive) (insert "\\Gamma")))
-    (define-key latex-mode-map [(meta m)(g)(I)]
+    (define-key LaTeX-mode-map [(meta m)(g)(I)]
       '(lambda () (interactive) (insert "\\iota")))
-    (define-key latex-mode-map [(meta m)(g)(J)]
+    (define-key LaTeX-mode-map [(meta m)(g)(J)]
       '(lambda () (interactive) (insert "\\epsilon")))
-    (define-key latex-mode-map [(meta m)(g)(L)]
+    (define-key LaTeX-mode-map [(meta m)(g)(L)]
       '(lambda () (interactive) (insert "\\Lambda")))
-    (define-key latex-mode-map [(meta m)(g)(O)]
+    (define-key LaTeX-mode-map [(meta m)(g)(O)]
       '(lambda () (interactive) (insert "\\Omega")))
-    (define-key latex-mode-map [(meta m)(g)(P)]
+    (define-key LaTeX-mode-map [(meta m)(g)(P)]
       '(lambda () (interactive) (insert "\\Pi")))
-    (define-key latex-mode-map [(meta m)(g)(Q)]
+    (define-key LaTeX-mode-map [(meta m)(g)(Q)]
       '(lambda () (interactive) (insert "\\vartheta")))
-    (define-key latex-mode-map [(meta m)(g)(R)]
+    (define-key LaTeX-mode-map [(meta m)(g)(R)]
       '(lambda () (interactive) (insert "\\varrho")))
-    (define-key latex-mode-map [(meta m)(g)(S)]
+    (define-key LaTeX-mode-map [(meta m)(g)(S)]
       '(lambda () (interactive) (insert "\\Sigma")))
-    (define-key latex-mode-map [(meta m)(g)(T)]
+    (define-key LaTeX-mode-map [(meta m)(g)(T)]
       '(lambda () (interactive) (insert "\\varsigma")))
-    (define-key latex-mode-map [(meta m)(g)(U)]
+    (define-key LaTeX-mode-map [(meta m)(g)(U)]
       '(lambda () (interactive) (insert "\\Upsilon")))
-    (define-key latex-mode-map [(meta m)(g)(V)]
+    (define-key LaTeX-mode-map [(meta m)(g)(V)]
       '(lambda () (interactive) (insert "\\Theta")))
-    (define-key latex-mode-map [(meta m)(g)(W)]
+    (define-key LaTeX-mode-map [(meta m)(g)(W)]
       '(lambda () (interactive) (insert "\\Omega")))
-    (define-key latex-mode-map [(meta m)(g)(X)]
+    (define-key LaTeX-mode-map [(meta m)(g)(X)]
       '(lambda () (interactive) (insert "\\Xi")))
-    (define-key latex-mode-map [(meta m)(g)(Y)]
+    (define-key LaTeX-mode-map [(meta m)(g)(Y)]
       '(lambda () (interactive) (insert "\\Psi")))))
 
 
@@ -274,6 +274,7 @@
               (skip-chars-forward " "))
           (end-of-line)))
     (insert (concat "\\begin{" env "}\n\n\\end{" env "}"))
+    (indent-for-tab-command)
     (previous-line 1)
     (indent-for-tab-command)))
 
@@ -300,7 +301,6 @@
   (lambda () (interactive)
      (heiner-latex-insert-environment "enumerate")
      (end-of-previous-line)
-     (insert "[1)]")
      (next-line 1)
      (insert "\\item")))
 
@@ -324,15 +324,15 @@
 ;; (add-hook
 ;;  'latex-mode-hook
 ;;  (lambda ()
-;;    (define-key latex-mode-map [(meta m)(t)(t)]
+;;    (define-key LaTeX-mode-map [(meta m)(t)(t)]
 ;;      '(lambda () (interactive)
 ;;         (heiner-latex-insert-environment-with-label "theorem")))
-;;    (define-key latex-mode-map [(meta m)(t)(l)]
+;;    (define-key LaTeX-mode-map [(meta m)(t)(l)]
 ;;      '(lambda () (interactive)
 ;;         (heiner-latex-insert-environment-with-label "lemma")))
-;;    (define-key latex-mode-map [(meta m)(t)(c)]
+;;    (define-key LaTeX-mode-map [(meta m)(t)(c)]
 ;;      '(lambda () (interactive)
 ;;         (heiner-latex-insert-environment-with-label "corollary")))
-;;    (define-key latex-mode-map [(meta m)(t)(r)]
+;;    (define-key LaTeX-mode-map [(meta m)(t)(r)]
 ;;      '(lambda () (interactive)
 ;;         (heiner-latex-insert-environment "remark")))))
