@@ -7,6 +7,7 @@
  '(cursor-in-non-selected-windows nil)
  '(initial-buffer-choice t)
  '(kill-do-not-save-duplicates t)
+ '(latex-indent-within-escaped-parens t)
  '(mouse-yank-at-point t)
  '(quack-default-program "mit-scheme")
  '(scroll-bar-mode (quote right))

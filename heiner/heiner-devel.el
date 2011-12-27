@@ -12,3 +12,4 @@
         (goto-char (+ origin (length open))))
     (insert (concat open close))
     (backward-char (length close))))
+
