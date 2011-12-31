@@ -52,6 +52,16 @@
 (require 'ruby-mode)
 (define-key ruby-mode-map "\C-m" 'newline-and-indent)
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
+(add-to-list 'load-path "~/.emacs.d/heiner")
+(load "xemacs-colors")
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/kde-emacs")
+(require 'kde-emacs)
+
+(setq kde-full-name "Heinrich Kuettler")
+(setq kde-email "heinrich.kuettler@gmx.de")
+
 (menu-bar-mode -1)
 (global-set-key [f9] 'menu-bar-mode)    ; toggles menu bar
 
@@ -60,10 +70,6 @@
 (setq-default indent-tabs-mode nil)
 
 (setq column-number-mode t)
-
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
-(add-to-list 'load-path "~/.emacs.d/heiner")
-(load "xemacs-colors")
 
 ;; from http://wttools.sourceforge.net/emacs-stuff/emacs.html
 (require 'pager)

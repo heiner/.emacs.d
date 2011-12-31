@@ -1,0 +1,3 @@
+[submodule "site-lisp/kde-emacs"]
+	path = site-lisp/kde-emacs
+	url = git://github.com/kuettler/kde-emacs.git
