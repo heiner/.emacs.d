@@ -5,6 +5,8 @@
   ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
  '(cursor-in-non-selected-windows nil)
+ '(ido-enable-flex-matching t)
+ '(ido-mode (quote buffer) nil (ido))
  '(initial-buffer-choice t)
  '(kill-do-not-save-duplicates t)
  '(latex-indent-within-escaped-parens t)
