@@ -53,6 +53,16 @@
 (require 'ruby-mode)
 (define-key ruby-mode-map "\C-m" 'newline-and-indent)
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
+(add-to-list 'load-path "~/.emacs.d/heiner")
+(load "xemacs-colors")
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/kde-emacs")
+(require 'kde-emacs)
+
+(setq kde-full-name "Heinrich Kuettler")
+(setq kde-email "heinrich.kuettler@gmx.de")
+
 (menu-bar-mode -1)
 (global-set-key [f9] 'menu-bar-mode)    ; toggles menu bar
 
@@ -62,10 +72,6 @@
 
 (setq column-number-mode t)
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
-(add-to-list 'load-path "~/.emacs.d/heiner")
-(load "xemacs-colors")
-
 ;; from http://wttools.sourceforge.net/emacs-stuff/emacs.html
 (require 'pager)
 (global-set-key "\C-v"	   'pager-page-down)
@@ -74,6 +80,40 @@
 (global-set-key [prior]	   'pager-page-up)
 (global-set-key '[M-up]    'pager-row-up)
 (global-set-key '[M-kp-8]  'pager-row-up)
+
+;; Visible bookmarks. See emacswiki.org/emacs/VisibleBookmarks
+(require 'bm)
+
+(defun bm-forward nil
+ "Goto next bookmark."
+ (interactive)
+ (if (= (bm-count) 0)
+     (if bm-cycle-all-buffers
+         (bm-first-in-next-buffer)
+       (forward-paragraph))
+   (bm-next)))
+
+(defun bm-backward nil
+ "Goto previous bookmark."
+ (interactive)
+ (if (= (bm-count) 0)
+     (if bm-cycle-all-buffers
+         (bm-last-in-previous-buffer)
+       (backward-paragraph))
+   (bm-previous)))
+
+(global-set-key (kbd "<left-fringe> <mouse-1>") #'(lambda(event)
+                                                    (interactive "e")
+                                                    (save-excursion
+                                                      (mouse-set-point event)
+                                                      (bm-toggle))))
+
+(global-set-key [(f3)] 'bm-toggle)
+(global-set-key [(control down)] 'bm-forward)  ; was forward-paragraph
+(global-set-key [(control up)] 'bm-backward)   ; was backward-paragraph
+
+;; http://www.emacswiki.org/emacs/InteractivelyDoThings
+(require 'ido)
 
 (setq frame-title-format "emacs: %b")
 
