@@ -108,7 +108,8 @@
                                                       (mouse-set-point event)
                                                       (bm-toggle))))
 
-(global-set-key [(f3)] 'bm-toggle)
+;;(global-set-key [(f3)] 'bm-toggle)
+(global-set-key [(control return)] 'bm-toggle)
 (global-set-key [(control down)] 'bm-forward)  ; was forward-paragraph
 (global-set-key [(control up)] 'bm-backward)   ; was backward-paragraph
 
@@ -116,11 +117,6 @@
 (require 'ido)
 
 (setq frame-title-format "emacs: %b")
-
-;; Have 50 rows and 84 columns now (works for my font/monitor)
-;; This does not work?!
-(setq initial-frame-alist
-      `((width . 84) (height . 60)))
 
 (load "latex-devel")
 (load "lilypond-devel")
@@ -133,8 +129,8 @@
 
 (define-key global-map [(f4)] 'make-in-background)
 
-;(load "nxhtml/autostart.el")
-;(require 'mediawiki)
+;;(load "nxhtml/autostart.el")
+;;(require 'mediawiki)
 
 (if (file-exists-p "heiner/passwords.el")
     (load "passwords"))
@@ -155,3 +151,7 @@
 ;;                         exit-minibuffer
 ;;                         keyboard-quit))
 ;; 	  (message-box (symbol-name this-command)))))
+
+(prefer-coding-system 'utf-8)
+
+(global-subword-mode t)
