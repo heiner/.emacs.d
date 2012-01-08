@@ -47,6 +47,7 @@
 (global-set-key [tab] 'agulbra-tab)
 ;; The above does not work in the minibuffer, hence:
 (define-key minibuffer-local-map [tab] 'minibuffer-complete)
+                                        ; But be careful about ido, see below!
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -115,6 +116,10 @@
 
 ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
 (require 'ido)
+;; Above, we set tab in minibuffer-local-map, not good. So:
+(add-hook 'ido-setup-hook
+          (lambda ()
+            (define-key ido-completion-map [tab] 'ido-complete)))
 
 (setq frame-title-format "emacs: %b")
 

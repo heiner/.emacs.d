@@ -5,7 +5,9 @@
   ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
  '(cursor-in-non-selected-windows nil)
+ '(ido-cannot-complete-command (quote ido-next-match))
  '(ido-enable-flex-matching t)
+ '(ido-max-window-height 1)
  '(ido-mode (quote buffer) nil (ido))
  '(initial-buffer-choice t)
  '(kill-do-not-save-duplicates t)
