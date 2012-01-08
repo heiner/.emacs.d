@@ -1,6 +1,4 @@
 
-(require 'heiner-devel)
-
 ;;(require 'tex-site)
 (require 'filladapt)
 ;;(pending-delete-mode t)

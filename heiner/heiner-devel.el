@@ -15,24 +15,25 @@
 
 (add-hook 'c-mode-common-hook
           (lambda () (c-subword-mode 1)))
+
+(defun compile-function (command)
+  `(lambda () (interactive)
+     (compile ,command)))
+
 (add-hook 'java-mode-hook
-          (lambda () (define-key java-mode-map [(f4)]
-                       '(lambda () (interactive)
-                          (save-buffer)
-                          (compile "ant debug -find")))))
+          (lambda ()
+            (define-key java-mode-map [(f4)]
+              (compile-function "ant debug -find"))
+            (define-key java-mode-map [(f5)]
+              (compile-function "ant debug install -find"))))
 
 ;; Adapted from emacswiki.org/emacs/CompileCommand
-(defun notify-compilation-result(buffer msg)
-  "Notify that the compilation is finished,
-close the *compilation* buffer if the compilation is successful,
-and set the focus back to Emacs frame"
+(defun delete-compilation-window-if-successful (buffer msg)
   (if (string-match "^finished" msg)
-      (delete-windows-on buffer))
-  (setq current-frame (car (car (cdr (current-frame-configuration)))))
-  (select-frame-set-input-focus current-frame))
+      (delete-windows-on buffer)))
 
 (add-to-list 'compilation-finish-functions
-	     'notify-compilation-result)
+	     'delete-compilation-window-if-successful)
 
 ;;; For compilation frame; from
 ;;; http://snarfed.org/emacs_special-display-function_prefer-other-visible-frame
@@ -43,7 +44,7 @@ and set the focus back to Emacs frame"
    doesn't support negative lookahead, ie (?!...), so i can't.)")
 
 (defvar special-display-switch-to-regexp
-  "^.TAGS: "
+  "^.TAGS: \\|\\*compilation\\*"
   "Regexp for buffer names that should be selected (switched to) when
    handled by `prefer-other-visible-frame'.")
 
@@ -85,6 +86,21 @@ I wish i could just use `switch-to-buffer-other-window' here, but it calls
           (set-window-buffer new buffer)
           new)))))
     (when (string-match special-display-switch-to-regexp (buffer-name buffer))
-      (select-frame (window-frame window))
+      (raise-frame (window-frame window))
       (select-window window))
     window))
+
+;; (defun prefer-other-visible-frame (buffer &optional buffer-data)
+;;   (let ((window
+;;          (cond
+;;           ((get-buffer-window buffer 0))
+;;           ((> (length (frame-list)) 1)
+;;            (next-window (selected-window) 'never-minibuf t))
+;;           (t (split-window)))))
+;;     ;;(select-window window)
+;;     (raise-frame (window-frame window))
+;;     (set-window-buffer window buffer)
+;;     window))
+
+;; (setq special-display-switch-to-regexp "^.TAGS: \\|\\*compilation\\*")
+;; (string-match special-display-switch-to-regexp "emacs: *compilation*")

@@ -86,6 +86,8 @@
 (global-set-key '[M-up]    'pager-row-up)
 (global-set-key '[M-kp-8]  'pager-row-up)
 
+(pc-selection-mode)
+
 ;; Visible bookmarks. See emacswiki.org/emacs/VisibleBookmarks
 (require 'bm)
 
@@ -120,17 +122,19 @@
 
 ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
 (require 'ido)
-;; Above, we set tab in minibuffer-local-map, not good. So:
+;; Above, we set tab in minibuffer-local-map; not good for ido, so:
 (add-hook 'ido-setup-hook
           (lambda ()
             (define-key ido-completion-map [tab] 'ido-complete)))
 
 (setq frame-title-format "emacs: %b")
 
+(require 'heiner-devel)
+
 (load "latex-devel")
 (load "lilypond-devel")
 
-(define-key global-map [(f4)] (lambda () (interactive) (compile "make -k")))
+(define-key global-map [(f4)] (compile-function "make -k"))
 
 ;;(load "nxhtml/autostart.el")
 ;;(require 'mediawiki)
@@ -141,7 +145,6 @@
 (define-key global-map [(meta backspace)] 'backward-kill-word)
 
 ;; "Wie es sich für einen PC gehört."
-(pc-selection-mode)
 (pending-delete-mode)
 
 ;;(setq visible-bell 0)
