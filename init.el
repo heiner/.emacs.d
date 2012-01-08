@@ -58,12 +58,16 @@
 (add-to-list 'load-path "~/.emacs.d/heiner")
 (load "xemacs-colors")
 
+;; The famous KDE Emacs bindings
 (add-to-list 'load-path "~/.emacs.d/site-lisp/kde-emacs")
 (require 'kde-emacs)
 
 (setq kde-full-name "Heinrich Kuettler")
 (setq kde-email "heinrich.kuettler@gmx.de")
 
+;;(c-subword-mode)
+
+;; Disable menu bar
 (menu-bar-mode -1)
 (global-set-key [f9] 'menu-bar-mode)    ; toggles menu bar
 
@@ -138,6 +142,7 @@
 
 ;; "Wie es sich für einen PC gehört."
 (pc-selection-mode)
+(pending-delete-mode)
 
 ;;(setq visible-bell 0)
 (setq ring-bell-function 'ignore) ; no alarm at all
@@ -153,4 +158,4 @@
 
 (prefer-coding-system 'utf-8)
 
-(global-subword-mode t)
+;;(global-subword-mode t)

@@ -9,6 +9,9 @@
 (defconst latex-command "pdflatex"
   "Command to run LaTeX")
 
+;; Ideas to do:
+;;   - completing-read for environments
+
 (add-hook
  'LaTeX-mode-hook
  (lambda ()

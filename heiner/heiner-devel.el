@@ -13,6 +13,14 @@
     (insert (concat open close))
     (backward-char (length close))))
 
+(add-hook 'c-mode-common-hook
+          (lambda () (c-subword-mode 1)))
+(add-hook 'java-mode-hook
+          (lambda () (define-key java-mode-map [(f4)]
+                       '(lambda () (interactive)
+                          (save-buffer)
+                          (compile "ant debug -find")))))
+
 ;; Adapted from emacswiki.org/emacs/CompileCommand
 (defun notify-compilation-result(buffer msg)
   "Notify that the compilation is finished,
