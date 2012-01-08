@@ -126,8 +126,7 @@
      ;; this works great, except in the case or compilation errors ...
      '(lambda () (interactive)
         (save-buffer)
-        (compile (concat latex-command " " buffer-file-name))
-        (delete-other-windows)))
+        (compile (concat latex-command " " buffer-file-name))))
 
    ;; compare amsldoc.pdf, 4.3 (PDF page 16/17)
    (define-key latex-mode-map [(meta m)(?.)(?,)]

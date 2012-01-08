@@ -126,13 +126,7 @@
 (load "latex-devel")
 (load "lilypond-devel")
 
-(defun make-in-background ()
-  "Executes a \"make\" in the current directory"
-  (interactive)
-  (compile "make -k")
-  (delete-other-windows))
-
-(define-key global-map [(f4)] 'make-in-background)
+(define-key global-map [(f4)] (lambda () (interactive) (compile "make -k")))
 
 ;;(load "nxhtml/autostart.el")
 ;;(require 'mediawiki)

@@ -4,6 +4,8 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(blink-cursor-mode nil)
+ '(compilation-scroll-output (quote first-error))
+ '(compilation-skip-threshold 2)
  '(cursor-in-non-selected-windows nil)
  '(ido-cannot-complete-command (quote ido-next-match))
  '(ido-enable-flex-matching t)
@@ -17,6 +19,8 @@
  '(scroll-bar-mode (quote right))
  '(show-paren-delay 0)
  '(show-paren-mode t)
+ '(special-display-buffer-names (quote ("*compilation*")))
+ '(special-display-function (quote prefer-other-visible-frame))
  '(x-stretch-cursor nil))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
