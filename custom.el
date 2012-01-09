@@ -3,6 +3,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(TeX-modes nil)
  '(blink-cursor-mode nil)
  '(compilation-scroll-output (quote first-error))
  '(compilation-skip-threshold 2)
@@ -22,7 +23,7 @@
  '(show-paren-delay 0)
  '(show-paren-mode t)
  '(special-display-buffer-names (quote ("*compilation*")))
- '(special-display-function (quote prefer-other-visible-frame))
+ '(special-display-function (quote prefer-other-frame))
  '(x-stretch-cursor nil))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.

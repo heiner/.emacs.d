@@ -131,10 +131,10 @@
 
 (require 'heiner-devel)
 
+(define-key global-map [(f4)] (compile-function "make -k"))
+
 (load "latex-devel")
 (load "lilypond-devel")
-
-(define-key global-map [(f4)] (compile-function "make -k"))
 
 ;;(load "nxhtml/autostart.el")
 ;;(require 'mediawiki)

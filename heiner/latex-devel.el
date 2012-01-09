@@ -11,55 +11,55 @@
 ;;   - completing-read for environments
 
 (add-hook
- 'LaTeX-mode-hook
+ 'latex-mode-hook
  (lambda ()
    (abbrev-mode t)
    (font-lock-mode t)
    (turn-on-auto-fill)
    (filladapt-mode t)
 
-   (define-key LaTeX-mode-map "\"" 'self-insert-command)
+   (define-key latex-mode-map "\"" 'self-insert-command)
 
-   (define-key LaTeX-mode-map [(meta ?.)]
+   (define-key latex-mode-map [(meta ?.)]
      '(lambda () (interactive) (insert "\\dotsc")))
 
-   (define-key LaTeX-mode-map [(meta m)(m)]
+   (define-key latex-mode-map [(meta m)(m)]
      '(lambda () (interactive)
         (heiner-enclose-by "$" "$")))
 
-   (define-key LaTeX-mode-map [(meta m)(f)]
+   (define-key latex-mode-map [(meta m)(f)]
      '(lambda () (interactive)
         (heiner-enclose-by "\\frac{" "}{}")))
 
-   (define-key LaTeX-mode-map [(f5)]
+   (define-key latex-mode-map [(f5)]
      '(lambda () (interactive)
         (heiner-latex-insert-environment
          (read-from-minibuffer "Environment: "))))
 
-   (define-key LaTeX-mode-map [(f6)]
+   (define-key latex-mode-map [(f6)]
      '(lambda () (interactive)
         (heiner-latex-insert-command
          (read-from-minibuffer "Command: "))))
 
-   (define-key LaTeX-mode-map [(f7)]
+   (define-key latex-mode-map [(f7)]
      'heiner-latex-insert-math-display)
 
-   (define-key LaTeX-mode-map [(meta m)(d)]
+   (define-key latex-mode-map [(meta m)(d)]
      'heiner-latex-insert-math-display)
 
-   (define-key LaTeX-mode-map [(meta m)(1)]
+   (define-key latex-mode-map [(meta m)(1)]
      '(lambda () (interactive)
         (insert "^{-1}")))
 
-   (define-key LaTeX-mode-map [(meta m)(<)]
+   (define-key latex-mode-map [(meta m)(<)]
      '(lambda () (interactive)
         (heiner-latex-insert-command "angles")))
 
-   (define-key LaTeX-mode-map [(meta m)(~)]
+   (define-key latex-mode-map [(meta m)(~)]
      '(lambda () (interactive)
         (heiner-latex-insert-command "tilde")))
 
-   (define-key LaTeX-mode-map [(meta m)(|)]
+   (define-key latex-mode-map [(meta m)(|)]
      '(lambda () (interactive)
         (heiner-latex-insert-command "abs")))
 
@@ -298,7 +298,7 @@
   "Insert command cmd the right way"
   (heiner-enclose-by (concat "\\" cmd "{") "}"))
 
-(define-abbrev text-mode-abbrev-table "enum" ""
+(define-abbrev latex-mode-abbrev-table "enum" ""
   (lambda () (interactive)
      (heiner-latex-insert-environment "enumerate")
      (end-of-previous-line)
@@ -325,15 +325,15 @@
 ;; (add-hook
 ;;  'latex-mode-hook
 ;;  (lambda ()
-;;    (define-key LaTeX-mode-map [(meta m)(t)(t)]
+;;    (define-key latex-mode-map [(meta m)(t)(t)]
 ;;      '(lambda () (interactive)
 ;;         (heiner-latex-insert-environment-with-label "theorem")))
-;;    (define-key LaTeX-mode-map [(meta m)(t)(l)]
+;;    (define-key latex-mode-map [(meta m)(t)(l)]
 ;;      '(lambda () (interactive)
 ;;         (heiner-latex-insert-environment-with-label "lemma")))
-;;    (define-key LaTeX-mode-map [(meta m)(t)(c)]
+;;    (define-key latex-mode-map [(meta m)(t)(c)]
 ;;      '(lambda () (interactive)
 ;;         (heiner-latex-insert-environment-with-label "corollary")))
-;;    (define-key LaTeX-mode-map [(meta m)(t)(r)]
+;;    (define-key latex-mode-map [(meta m)(t)(r)]
 ;;      '(lambda () (interactive)
 ;;         (heiner-latex-insert-environment "remark")))))
