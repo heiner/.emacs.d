@@ -31,7 +31,9 @@
 (defun delete-compilation-window-if-successful (buffer msg)
   "Delete the compilation window if the compilation was successful and
 the compilation window did not have a frame of its own."
-  (if (and (string-match "^Compilation finished" msg) (not (one-window-p)))
+  (if (and (string-match "^finished" msg)
+           (equal "*compilation*" (buffer-name buffer))
+           (not (one-window-p)))
       (delete-windows-on buffer)))
 
 (add-to-list 'compilation-finish-functions

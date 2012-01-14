@@ -298,7 +298,7 @@
   "Insert command cmd the right way"
   (heiner-enclose-by (concat "\\" cmd "{") "}"))
 
-(define-abbrev latex-mode-abbrev-table "enum" ""
+(define-abbrev text-mode-abbrev-table "enum" ""
   (lambda () (interactive)
      (heiner-latex-insert-environment "enumerate")
      (end-of-previous-line)
