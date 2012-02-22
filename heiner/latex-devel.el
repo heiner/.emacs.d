@@ -160,6 +160,8 @@
         (interactive)
         (insert "\\cdot")))
 
+   (define-key latex-mode-map [(control return)] nil)
+
    (define-key latex-mode-map [(meta m)(g)(a)]
      '(lambda () (interactive) (insert "\\alpha")))
    (define-key latex-mode-map [(meta m)(g)(b)]

@@ -27,6 +27,9 @@
             (define-key java-mode-map [(f5)]
               (compile-function "ant debug install -find"))))
 
+(add-hook 'ruby-mode-hook
+          (lambda () (abbrev-mode 1)))
+
 ;; Adapted from emacswiki.org/emacs/CompileCommand
 (defun delete-compilation-window-if-successful (buffer msg)
   "Delete the compilation window if the compilation was successful and
