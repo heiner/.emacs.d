@@ -1,5 +1,6 @@
 ;;;; Heiner's emacs init file, ~/.emacs.d/init.el
 ;;;; Written for
+;;;; * GNU Emacs 23.3.1 (i686-pc-linux-gnu, GTK+ Version 2.24.10)
 ;;;; * GNU Emacs 23.2.1 (x86_64-pc-linux-gnu, GTK+ Version 2.20.1)
 ;;;; * GNU Emacs 23.1.50.1 (i486-pc-linux-gnu, GTK+ Version 2.18.0)
 
