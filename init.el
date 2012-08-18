@@ -146,7 +146,8 @@
 (define-key global-map [(meta backspace)] 'backward-kill-word)
 
 ;; "Wie es sich für einen PC gehört."
-(pending-delete-mode)
+;(pending-delete-mode)
+(pc-selection-mode)
 
 ;;(setq visible-bell 0)
 (setq ring-bell-function 'ignore) ; no alarm at all

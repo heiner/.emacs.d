@@ -250,7 +250,24 @@
    (define-key latex-mode-map [(meta m)(g)(X)]
      '(lambda () (interactive) (insert "\\Xi")))
    (define-key latex-mode-map [(meta m)(g)(Y)]
-     '(lambda () (interactive) (insert "\\Psi")))))
+     '(lambda () (interactive) (insert "\\Psi")))
+
+   (define-abbrev latex-mode-abbrev-table "enum" ""
+     (lambda () (interactive)
+       (heiner-latex-insert-environment "enumerate")
+       (end-of-previous-line)
+       (next-line 1)
+       (insert "\\item")))
+
+   (define-abbrev latex-mode-abbrev-table "itemi" ""
+     (lambda () (interactive)
+       (heiner-latex-insert-environment "itemize")
+       (insert "\\item")))
+
+   (define-abbrev latex-mode-abbrev-table "eqr" ""
+     (lambda () (interactive)
+       (insert "\\eqref{eq:}")
+       (backward-char)))))
 
 (defun end-of-previous-line ()
   (previous-line 1)
@@ -299,23 +316,6 @@
 (defun heiner-latex-insert-command (cmd)
   "Insert command cmd the right way"
   (heiner-enclose-by (concat "\\" cmd "{") "}"))
-
-(define-abbrev text-mode-abbrev-table "enum" ""
-  (lambda () (interactive)
-     (heiner-latex-insert-environment "enumerate")
-     (end-of-previous-line)
-     (next-line 1)
-     (insert "\\item")))
-
-(define-abbrev text-mode-abbrev-table "itemi" ""
-  (lambda () (interactive)
-    (heiner-latex-insert-environment "itemize")
-    (insert "\\item")))
-
-(define-abbrev text-mode-abbrev-table "eqr" ""
-  (lambda () (interactive)
-    (insert "\\eqref{eq:}")
-    (backward-char)))
 
 ;; (defun heiner-latex-insert-environment-with-label (env)
 ;;   "Insert environment env with a label, the right way"
