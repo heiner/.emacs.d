@@ -123,6 +123,10 @@
      '(lambda () (interactive)
         (heiner-enclose-by "{" "}")))
 
+   (define-key latex-mode-map [(shift f8)]
+     '(lambda () (interactive)
+        (heiner-enclose-by "[" "]")))
+
    (define-key latex-mode-map [(f4)]
      ;; this works great, except in the case or compilation errors ...
      '(lambda () (interactive)
