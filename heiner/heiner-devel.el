@@ -55,3 +55,23 @@ the compilation window did not have a frame of its own."
      (raise-frame (window-frame window))
      (set-window-buffer window buffer)
      window))
+
+;; http://emacswiki.org/emacs/ParEdit
+(autoload 'paredit-mode "paredit"
+  "Minor mode for pseudo-structurally editing Lisp code." t)
+(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
+(add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
+(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
+(add-hook 'scheme-mode-hook           (lambda () (paredit-mode +1)))
+(add-hook 'clojure-mode-hook          (lambda () (paredit-mode +1)))
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/clojure-mode")
+(require 'clojure-mode)
+
+(setq inferior-lisp-program "lein repl")
+
+(eval-after-load 'paredit
+  '(progn (define-key paredit-mode-map (kbd ")")
+            'paredit-close-parenthesis)
+          (define-key paredit-mode-map (kbd "M-)")
+            'paredit-close-parenthesis-and-newline)))
