@@ -39,7 +39,7 @@
 (require 'kde-emacs)
 
 (setq kde-full-name "Heinrich Kuettler")
-(setq kde-email "heinrich.kuettler@gmx.de")
+(setq kde-email "heinrich.kuettler@gmail.com")
 
 ;;(c-subword-mode)
 
@@ -101,8 +101,8 @@
 (global-set-key* [(shift down)] (ensure-mark-active) (next-line))
 (global-set-key* [(shift right)] (ensure-mark-active) (forward-char))
 (global-set-key* [(shift left)] (ensure-mark-active) (backward-char))
-(global-set-key* [next] (ensure-mark-active) (pager-page-down))
-(global-set-key* [prior] (ensure-mark-active) (pager-page-up))
+(global-set-key* [(shift next)] (ensure-mark-active) (pager-page-down))
+(global-set-key* [(shift prior)] (ensure-mark-active) (pager-page-up))
 
 ;;(setq visible-bell 0)
 (setq ring-bell-function 'ignore) ; no alarm at all
@@ -132,14 +132,15 @@
        (backward-paragraph))
    (bm-previous)))
 
-(global-set-key (kbd "<left-fringe> <mouse-1>") #'(lambda(event)
-                                                    (interactive "e")
-                                                    (save-excursion
-                                                      (mouse-set-point event)
-                                                      (bm-toggle))))
+(global-set-key (kbd "<left-fringe> <mouse-1>")
+                (lambda (event)
+                  (interactive "e")
+                  (save-excursion
+                    (mouse-set-point event)
+                    (bm-toggle))))
 
 (global-set-key [(control return)] 'bm-toggle)
-(global-set-key [(control down)] 'bm-forward)  ; was forward-paragraph
-(global-set-key [(control up)] 'bm-backward)   ; was backward-paragraph
+(global-set-key [(control down)] 'bm-forward)
+(global-set-key [(control up)] 'bm-backward)
 
 (global-set-key [(f3)] 'isearch-repeat-forward)
