@@ -125,4 +125,4 @@ of the two calls of g are equal, nil otherwise"
 (global-set-key [tab] 'new-agulbra-tab)
 ;; The above does not work in the minibuffer, hence:
 (define-key minibuffer-local-map [tab] 'minibuffer-complete)
-                                        ; But be careful about ido, init.el!
+                                        ; But be careful about ido, see init.el!

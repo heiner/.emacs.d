@@ -62,7 +62,54 @@
 (global-set-key '[M-up]    'pager-row-up)
 (global-set-key '[M-kp-8]  'pager-row-up)
 
-(pc-selection-mode)
+;; http://www.emacswiki.org/emacs/InteractivelyDoThings
+(require 'ido)
+
+;; We set tab in minibuffer-local-map; not good for ido, so:
+(add-hook 'ido-setup-hook
+          (lambda ()
+            (define-key ido-completion-map [tab] 'ido-complete)))
+
+(setq frame-title-format "emacs: %b")
+
+(require 'heiner-devel)
+
+(define-key global-map [(f4)] (compile-function "make -k"))
+
+(load "latex-devel")
+(load "lilypond-devel")
+
+;;(load "nxhtml/autostart.el")
+(require 'mediawiki)
+
+(if (file-exists-p "heiner/passwords.el")
+    (load "passwords"))
+
+(define-key global-map [(meta backspace)] 'backward-kill-word)
+
+;; From http://stackoverflow.com/questions/3124844/what-are-your-favorite-global-key-bindings-in-emacs
+(defmacro global-set-key* (keys &rest body)
+  `(global-set-key ,keys (lambda () (interactive) ,@body)))
+
+(defun ensure-mark-active ()
+  (unless mark-active
+    (push-mark (point) nil t)))
+
+;; (pending-delete-mode) (delete-selection-mode t) (pc-selection-mode)
+;; Pseudo pc selection, but without mark deactivation
+(global-set-key* [(shift up)] (ensure-mark-active) (previous-line))
+(global-set-key* [(shift down)] (ensure-mark-active) (next-line))
+(global-set-key* [(shift right)] (ensure-mark-active) (forward-char))
+(global-set-key* [(shift left)] (ensure-mark-active) (backward-char))
+(global-set-key* [next] (ensure-mark-active) (pager-page-down))
+(global-set-key* [prior] (ensure-mark-active) (pager-page-up))
+
+;;(setq visible-bell 0)
+(setq ring-bell-function 'ignore) ; no alarm at all
+
+(prefer-coding-system 'utf-8)
+
+;;(global-subword-mode t)
 
 ;; Visible bookmarks. See emacswiki.org/emacs/VisibleBookmarks
 (require 'bm)
@@ -91,51 +138,8 @@
                                                       (mouse-set-point event)
                                                       (bm-toggle))))
 
-;;(global-set-key [(f3)] 'bm-toggle)
 (global-set-key [(control return)] 'bm-toggle)
 (global-set-key [(control down)] 'bm-forward)  ; was forward-paragraph
 (global-set-key [(control up)] 'bm-backward)   ; was backward-paragraph
 
-;; http://www.emacswiki.org/emacs/InteractivelyDoThings
-(require 'ido)
-;; Above, we set tab in minibuffer-local-map; not good for ido, so:
-(add-hook 'ido-setup-hook
-          (lambda ()
-            (define-key ido-completion-map [tab] 'ido-complete)))
-
-(setq frame-title-format "emacs: %b")
-
-(require 'heiner-devel)
-
-(define-key global-map [(f4)] (compile-function "make -k"))
-
-(load "latex-devel")
-(load "lilypond-devel")
-
-;;(load "nxhtml/autostart.el")
-;;(require 'mediawiki)
-
-(if (file-exists-p "heiner/passwords.el")
-    (load "passwords"))
-
-(define-key global-map [(meta backspace)] 'backward-kill-word)
-
-;; "Wie es sich für einen PC gehört."
-;(pending-delete-mode)
-(pc-selection-mode)
-
-;;(setq visible-bell 0)
-(setq ring-bell-function 'ignore) ; no alarm at all
-
-;; (setq ring-bell-function
-;;       (lambda ()
-;; 	(unless (memq this-command
-;; 		      '(isearch-abort
-;;                         abort-recursive-edit
-;;                         exit-minibuffer
-;;                         keyboard-quit))
-;; 	  (message-box (symbol-name this-command)))))
-
-(prefer-coding-system 'utf-8)
-
-;;(global-subword-mode t)
+(global-set-key [(f3)] 'isearch-repeat-forward)
