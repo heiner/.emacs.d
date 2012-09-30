@@ -25,31 +25,6 @@
 (setq select-active-regions t)
 (global-set-key [mouse-2] 'mouse-yank-primary)
 
-;; From kde-emacs-core.el
-;; http://websvn.kde.org/trunk/KDE/kdesdk/scripts/kde-emacs/
-;; Originally by Arnt Gulbrandsen ("agulbra")
-(defun agulbra-tab (arg)
-  "Do the right thing about tabs."
-  (interactive "*P")
-  (cond
-   ((and (not (looking-at "[A-Za-z0-9ÄÖÜäöü]"))
-         (save-excursion
-	   (backward-char)
-           (looking-at "[A-Za-z0-9ÄÖÜäöü:>_\\-\\&\\.(){}\\*\\+/]"))
-	 ;; if in ruby mode, don't try to expand "end"
-	 (or (not (equal major-mode 'ruby-mode))
-	  (not (looking-back "end"))))
-    (condition-case nil
-	(dabbrev-expand arg)
-      (error (indent-for-tab-command))))
-   (t
-    (indent-for-tab-command))))
-
-(global-set-key [tab] 'agulbra-tab)
-;; The above does not work in the minibuffer, hence:
-(define-key minibuffer-local-map [tab] 'minibuffer-complete)
-                                        ; But be careful about ido, see below!
-
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (require 'ruby-mode)
