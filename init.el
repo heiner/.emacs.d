@@ -95,7 +95,7 @@
   (unless mark-active
     (push-mark (point) nil t)))
 
-;; (pending-delete-mode) (delete-selection-mode t) (pc-selection-mode)
+;; (pending-delete-mode) (delete-selection-mode t) (pc-selection-mode 0)
 ;; Pseudo pc selection, but without mark deactivation
 (global-set-key* [(shift up)] (ensure-mark-active) (previous-line))
 (global-set-key* [(shift down)] (ensure-mark-active) (next-line))

@@ -16,6 +16,7 @@
  '(ido-max-window-height 1)
  '(ido-mode (quote buffer) nil (ido))
  '(initial-buffer-choice t)
+ '(kde-use-pc-select nil)
  '(kill-do-not-save-duplicates t)
  '(latex-indent-within-escaped-parens t)
  '(mouse-yank-at-point t)
