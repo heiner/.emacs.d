@@ -103,6 +103,16 @@
 (global-set-key* [(shift left)] (ensure-mark-active) (backward-char))
 (global-set-key* [(shift next)] (ensure-mark-active) (pager-page-down))
 (global-set-key* [(shift prior)] (ensure-mark-active) (pager-page-up))
+(global-set-key* [(control shift right)] (ensure-mark-active) (forward-word))
+(global-set-key* [(control shift left)] (ensure-mark-active) (backward-word))
+(global-set-key* [(shift home)]
+                 (ensure-mark-active) (move-beginning-of-line nil))
+(global-set-key* [(shift end)]
+                 (ensure-mark-active) (move-end-of-line nil))
+(global-set-key* [(control shift home)]
+                 (ensure-mark-active) (beginning-of-buffer))
+(global-set-key* [(control shift end)]
+                 (ensure-mark-active) (end-of-buffer))
 
 ;;(setq visible-bell 0)
 (setq ring-bell-function 'ignore) ; no alarm at all
