@@ -118,11 +118,35 @@ of the two calls of g are equal, nil otherwise"
 	  (not (looking-back "end"))))
     (condition-case nil
 	(dabbrev-expand arg)
-      (error (indent-or-fixup-whitespace))))
+      (error "Error in dabbrev-expand" (indent-or-fixup-whitespace))))
    (t
     (indent-or-fixup-whitespace))))
 
-(global-set-key [tab] 'new-agulbra-tab)
+(defun uli-agulbra-tab (arg)
+  "Do the right thing about tabs."
+  (interactive "*P")
+  (cond
+   ((and (not (looking-at "[[:alnum:]]"))
+         (save-excursion
+	   (backward-char)
+           (looking-at "[[:alnum:]:>_\\-\\&\\.{}\\*\\+/]"))
+	 ;; if in ruby mode, don't try to expand "end"
+	 (or (not (equal major-mode 'ruby-mode))
+	  (not (looking-back "end"))))
+    (dabbrev-expand arg))
+   ((and (looking-at "[[:space:]]")
+         (not (string-match "^[[:space:]]*$"
+                       (buffer-substring-no-properties
+                        (line-beginning-position)
+                        (point)))))
+    (fixup-whitespace)
+    (if (looking-at "[[:space:]]")
+        (forward-char)))
+   (t
+    (indent-for-tab-command))))
+
+(global-set-key [tab] 'uli-agulbra-tab)
+;;(global-set-key [tab] 'new-agulbra-tab)
 ;; The above does not work in the minibuffer, hence:
 (define-key minibuffer-local-map [tab] 'minibuffer-complete)
                                         ; But be careful about ido, see init.el!
