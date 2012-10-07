@@ -76,77 +76,49 @@ the compilation window did not have a frame of its own."
           (define-key paredit-mode-map (kbd "M-)")
             'paredit-close-parenthesis-and-newline)))
 
-(defun funcall-did-not-change-value (f g)
-  "Call g, then f, then g again. Return true if the return values
-of the two calls of g are equal, nil otherwise"
-  (let ((y (funcall g)))
-    (funcall f)
-    (equal y (funcall g))))
-
-(defun indent-or-fixup-whitespace nil
-  (cond
-   ((or (looking-at "[^[:space:]]")
-        (string-match "^[[:space:]]*$"
-                      (buffer-substring-no-properties
-                       (line-beginning-position)
-                       (point))))
-    (indent-for-tab-command))
-   ((funcall-did-not-change-value
-     'indent-for-tab-command
-     (lambda ()
-       (list (point)
-             (buffer-substring-no-properties
-              (line-beginning-position)
-              (line-end-position)))))
-    (fixup-whitespace)
-    (if (looking-at "[[:space:]]")
-        (forward-char)))))
-
-;; Taken from kde-emacs-core.el and adapted
+;; Insprired by the tab from kde-emacs-core.el, see
 ;; http://websvn.kde.org/trunk/KDE/kdesdk/scripts/kde-emacs/
-;; Originally by Arnt Gulbrandsen ("agulbra")
-(defun new-agulbra-tab (arg)
+;; Version there originally by Arnt Gulbrandsen ("agulbra")
+(defun agulbra-tab (arg &optional skip-abbrev)
   "Do the right thing about tabs."
   (interactive "*P")
   (cond
-   ((and (not (looking-at "[[:alnum:]]"))
+   ((and (not skip-abbrev)
+         (not (looking-at "[[:alnum:]]"))
          (save-excursion
 	   (backward-char)
            (looking-at "[[:alnum:]:>_\\-\\&\\.{}\\*\\+/]"))
 	 ;; if in ruby mode, don't try to expand "end"
 	 (or (not (equal major-mode 'ruby-mode))
-	  (not (looking-back "end"))))
+             (not (looking-back "end"))))
     (condition-case nil
 	(dabbrev-expand arg)
-      (error "Error in dabbrev-expand" (indent-or-fixup-whitespace))))
-   (t
-    (indent-or-fixup-whitespace))))
-
-(defun uli-agulbra-tab (arg)
-  "Do the right thing about tabs."
-  (interactive "*P")
-  (cond
-   ((and (not (looking-at "[[:alnum:]]"))
-         (save-excursion
-	   (backward-char)
-           (looking-at "[[:alnum:]:>_\\-\\&\\.{}\\*\\+/]"))
-	 ;; if in ruby mode, don't try to expand "end"
-	 (or (not (equal major-mode 'ruby-mode))
-	  (not (looking-back "end"))))
-    (dabbrev-expand arg))
-   ((and (looking-at "[[:space:]]")
+      ;; When no abbrev found, indent or fixup whitespace
+      (error (other-agulbra-tab arg t))))
+   ((looking-at "[[:space:]]*$")
+    (delete-horizontal-space)
+    (indent-for-tab-command))
+   ((and (or (looking-at "[[:space:]]")
+             (save-excursion
+               (backward-char)
+               (looking-at "[[:space:]]")))
          (not (string-match "^[[:space:]]*$"
-                       (buffer-substring-no-properties
-                        (line-beginning-position)
-                        (point)))))
-    (fixup-whitespace)
-    (if (looking-at "[[:space:]]")
-        (forward-char)))
+                            (buffer-substring-no-properties
+                             (line-beginning-position)
+                             (point)))))
+    (let ((current-point (point)))
+      (indent-for-tab-command)
+      (when (= current-point (point))
+        (let ((line-end (line-end-position)))
+          (fixup-whitespace)
+          (if (and (not (= line-end (line-end-position)))
+                   (looking-at "[[:space:]]"))
+              (forward-char)
+            (goto-char current-point))))))
    (t
     (indent-for-tab-command))))
 
-(global-set-key [tab] 'uli-agulbra-tab)
-;;(global-set-key [tab] 'new-agulbra-tab)
+(global-set-key [tab] 'agulbra-tab)
 ;; The above does not work in the minibuffer, hence:
 (define-key minibuffer-local-map [tab] 'minibuffer-complete)
                                         ; But be careful about ido, see init.el!
