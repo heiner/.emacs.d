@@ -16,7 +16,7 @@
 (add-hook 'c-mode-common-hook
           (lambda () (c-subword-mode 1)))
 
-(defun compile-function (command)
+(defmacro compile-function (command)
   `(lambda () (interactive)
      (compile ,command)))
 
@@ -94,7 +94,7 @@ the compilation window did not have a frame of its own."
     (condition-case nil
 	(dabbrev-expand arg)
       ;; When no abbrev found, indent or fixup whitespace
-      (error (other-agulbra-tab arg t))))
+      (error (agulbra-tab arg t))))
    ((looking-at "[[:space:]]*$")
     (delete-horizontal-space)
     (indent-for-tab-command))

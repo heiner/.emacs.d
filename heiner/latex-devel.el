@@ -53,7 +53,7 @@
 
    (define-key latex-mode-map [(meta m)(<)]
      '(lambda () (interactive)
-        (heiner-latex-insert-command "angles")))
+        (heiner-enclose-by "\\<" "\\>")))
 
    (define-key latex-mode-map [(meta m)(~)]
      '(lambda () (interactive)

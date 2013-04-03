@@ -37,6 +37,7 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "ivory2" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal :foundry "unknown" :family "Droid Sans Mono"))))
+ '(bm-face ((((class color) (background light)) (:background "bisque"))))
  '(cursor ((t (:background "red3"))))
  '(paren-face-match ((t (:background "darkseagreen2"))))
  '(show-paren-match ((t (:background "darkseagreen2")))))
