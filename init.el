@@ -65,10 +65,11 @@
 ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
 (require 'ido)
 
-;; We set tab in minibuffer-local-map; not good for ido, so:
 (add-hook 'ido-setup-hook
           (lambda ()
-            (define-key ido-completion-map [tab] 'ido-complete)))
+            ;; We set tab in minibuffer-local-map; not good for ido, so:
+            (define-key ido-completion-map [tab] 'ido-complete)
+            (define-key ido-completion-map [backtab] 'ido-prev-match)))
 
 (setq frame-title-format "emacs: %b")
 
