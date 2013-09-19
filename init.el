@@ -53,6 +53,11 @@
 
 (setq column-number-mode t)
 
+;; unbind `C-x C-c'
+(global-unset-key [(control x) (control c)])
+;(global-unset-key "\C-z")
+
+
 ;; from http://wttools.sourceforge.net/emacs-stuff/emacs.html
 (require 'pager)
 (global-set-key "\C-v"	   'pager-page-down)

@@ -83,6 +83,10 @@
      '(lambda () (interactive)
         (insert "\\infty")))
 
+   (define-key latex-mode-map [(meta m)(?0)]
+     '(lambda () (interactive)
+        (insert "\\varnothing")))
+
    (define-key latex-mode-map [(meta m)(?\\)]
      '(lambda () (interactive)
         (insert "\\setminus")))
@@ -289,8 +293,8 @@
         (delete-region (region-beginning) (region-end))
 
         (let ((ibegin (point))
-              (content (if (char-equal
-                            (heiner-char-at-index content -1) ?\n)
+              (content (if (string-equal
+                            (substring content -1 nil) "\n")
                            content
                          (concat content "\n"))))
           (insert (concat open "\n" content close))
