@@ -134,6 +134,7 @@
    (define-key latex-mode-map [(f4)]
      ;; this works great, except in the case or compilation errors ...
      '(lambda () (interactive)
+        (set-buffer-modified-p t)
         (save-buffer)
         (if (file-exists-p "Makefile")
           (compile "make -k")
