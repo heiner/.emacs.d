@@ -4,6 +4,13 @@
 ;;;; * GNU Emacs 23.2.1 (x86_64-pc-linux-gnu, GTK+ Version 2.20.1)
 ;;;; * GNU Emacs 23.1.50.1 (i486-pc-linux-gnu, GTK+ Version 2.18.0)
 
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
@@ -32,19 +39,19 @@
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 (add-to-list 'load-path "~/.emacs.d/heiner")
-(load "xemacs-colors")
+;(load "xemacs-colors")
 
 ;; The famous KDE Emacs bindings
-(add-to-list 'load-path "~/.emacs.d/site-lisp/kde-emacs")
-(require 'kde-emacs)
+;(add-to-list 'load-path "~/.emacs.d/site-lisp/kde-emacs")
+;(require 'kde-emacs)
 
-(setq kde-full-name "Heinrich Kuettler")
-(setq kde-email "heinrich.kuettler@gmail.com")
+;(setq kde-full-name "Heinrich Kuettler")
+;(setq kde-email "heinrich.kuettler@gmail.com")
 
 ;;(c-subword-mode)
 
-;; Disable menu bar
-(menu-bar-mode -1)
+
+;; (menu-bar-mode -1)  ;; Disable menu bar
 (global-set-key [f9] 'menu-bar-mode)    ; toggles menu bar
 
 (delete-selection-mode 1)
@@ -55,7 +62,7 @@
 
 ;; unbind `C-x C-c'
 (global-unset-key [(control x) (control c)])
-;(global-unset-key "\C-z")
+(global-unset-key "\C-z")
 
 
 ;; from http://wttools.sourceforge.net/emacs-stuff/emacs.html
@@ -69,6 +76,9 @@
 
 ;; http://www.emacswiki.org/emacs/InteractivelyDoThings
 (require 'ido)
+
+;(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-bazel-mode")
+;(require 'bazel-mode)
 
 (add-hook 'ido-setup-hook
           (lambda ()
@@ -86,7 +96,7 @@
 (load "lilypond-devel")
 
 ;;(load "nxhtml/autostart.el")
-(require 'mediawiki)
+;(require 'mediawiki)
 
 (if (file-exists-p "heiner/passwords.el")
     (load "passwords"))
@@ -156,7 +166,21 @@
                     (bm-toggle))))
 
 (global-set-key [(control return)] 'bm-toggle)
-(global-set-key [(control down)] 'bm-forward)
-(global-set-key [(control up)] 'bm-backward)
+(global-set-key [(s return)] 'bm-toggle)
+(global-set-key [(s down)] 'bm-forward)
+(global-set-key [(s up)] 'bm-backward)
+
+(global-set-key* (kbd "M-3") (insert-and-inherit ?#))
 
 (global-set-key [(f3)] 'isearch-repeat-forward)
+
+(when (eq system-type 'darwin)
+  ;; This is beginning/end-of-buffer by default.
+  (global-set-key (kbd "<home>") 'beginning-of-line)
+  (global-set-key (kbd "<end>") 'end-of-line))
+
+
+(setq tramp-default-method "ssh")
+
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))

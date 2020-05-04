@@ -56,25 +56,58 @@ the compilation window did not have a frame of its own."
      (set-window-buffer window buffer)
      window))
 
-;; http://emacswiki.org/emacs/ParEdit
-(autoload 'paredit-mode "paredit"
-  "Minor mode for pseudo-structurally editing Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
-(add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
-(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
-(add-hook 'scheme-mode-hook           (lambda () (paredit-mode +1)))
-(add-hook 'clojure-mode-hook          (lambda () (paredit-mode +1)))
+;;; http://emacswiki.org/emacs/ParEdit
+;(autoload 'paredit-mode "paredit"
+;  "Minor mode for pseudo-structurally editing Lisp code." t)
+;(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
+;(add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
+;(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
+;(add-hook 'scheme-mode-hook           (lambda () (paredit-mode +1)))
+;;(add-hook 'clojure-mode-hook          (lambda () (paredit-mode +1)))
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/clojure-mode")
-(require 'clojure-mode)
+;(add-to-list 'load-path "~/.emacs.d/site-lisp/clojure-mode")
+;(require 'clojure-mode)
+
+(defun clang-format-on-save ()
+  (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
+(add-hook 'c++-mode-hook 'clang-format-on-save)
+(add-hook 'c-mode-hook 'clang-format-on-save)
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+
+(require 'blacken)
+(add-hook 'python-mode-hook 'blacken-mode)
 
 (setq inferior-lisp-program "lein repl")
 
-(eval-after-load 'paredit
-  '(progn (define-key paredit-mode-map (kbd ")")
-            'paredit-close-parenthesis)
-          (define-key paredit-mode-map (kbd "M-)")
-            'paredit-close-parenthesis-and-newline)))
+(defun heiner-indent-shift-left (start end &optional count)
+  "Copied from python-indent-shift-left in python.el"
+  (interactive
+   (if mark-active
+       (list (save-excursion
+               (goto-char (region-beginning)) (line-beginning-position))
+             (region-end) current-prefix-arg)
+     (list (line-beginning-position) (line-end-position) current-prefix-arg)))
+  (if count
+      (setq count (prefix-numeric-value count))
+    (setq count python-indent-offset))
+  (when (> count 0)
+    (let ((deactivate-mark nil))
+      (save-excursion
+        (goto-char start)
+        (while (< (point) end)
+          (if (and (< (current-indentation) count)
+                   (not (looking-at "[ \t]*$")))
+              (user-error "Can't shift all lines enough"))
+          (forward-line))
+        (indent-rigidly start end (- count))))))
+
+(global-set-key [S-tab] 'heiner-indent-shift-left)
+
+;(eval-after-load 'paredit
+;  '(progn (define-key paredit-mode-map (kbd ")")
+;            'paredit-close-parenthesis)
+;          (define-key paredit-mode-map (kbd "M-)")
+;            'paredit-close-parenthesis-and-newline)))
 
 ;; Insprired by the tab from kde-emacs-core.el, see
 ;; http://websvn.kde.org/trunk/KDE/kdesdk/scripts/kde-emacs/
@@ -83,6 +116,14 @@ the compilation window did not have a frame of its own."
   "Do the right thing about tabs."
   (interactive "*P")
   (cond
+   ((region-active-p)
+    (indent-rigidly
+     (save-excursion
+       (goto-char (region-beginning))
+       (line-beginning-position))
+     (region-end)
+     4)
+    (setq deactivate-mark nil))
    ((and (not skip-abbrev)
          (not (looking-at "[[:alnum:]]"))
          (save-excursion

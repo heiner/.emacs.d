@@ -4,3 +4,6 @@
 [submodule "site-lisp/clojure-mode"]
 	path = site-lisp/clojure-mode
 	url = git://github.com/technomancy/clojure-mode.git
+[submodule "site-lisp/emacs-bazel-mode"]
+	path = site-lisp/emacs-bazel-mode
+	url = git@github.com:bazelbuild/emacs-bazel-mode.git

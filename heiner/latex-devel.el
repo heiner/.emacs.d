@@ -1,10 +1,10 @@
 
 ;;(require 'tex-site)
-(require 'filladapt)
+;(require 'filladapt)
 ;;(pending-delete-mode t)
 ;;(autoload 'latex-mode "auc-tex" "Mode for LaTeX" t)
 
-(defconst latex-command "pdflatex"
+(defconst latex-command "/Library/TeX/texbin/pdflatex"
   "Command to run LaTeX")
 
 ;; Ideas to do:
@@ -16,7 +16,7 @@
    (abbrev-mode t)
    (font-lock-mode t)
    (turn-on-auto-fill)
-   (filladapt-mode t)
+   ;(filladapt-mode t)
 
    (define-key latex-mode-map "\"" 'self-insert-command)
 
