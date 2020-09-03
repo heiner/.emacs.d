@@ -68,11 +68,14 @@ the compilation window did not have a frame of its own."
 ;(add-to-list 'load-path "~/.emacs.d/site-lisp/clojure-mode")
 ;(require 'clojure-mode)
 
-(defun clang-format-on-save ()
-  (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
-(add-hook 'c++-mode-hook 'clang-format-on-save)
-(add-hook 'c-mode-hook 'clang-format-on-save)
+;(defun clang-format-on-save ()
+;  (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
+;(add-hook 'c++-mode-hook 'clang-format-on-save)
+;(add-hook 'c-mode-hook 'clang-format-on-save)
 (add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook #'clang-format+-mode)
+(setq-default c-basic-offset 4)
+
 
 (require 'blacken)
 (add-hook 'python-mode-hook 'blacken-mode)
@@ -163,3 +166,18 @@ the compilation window did not have a frame of its own."
 ;; The above does not work in the minibuffer, hence:
 (define-key minibuffer-local-map [tab] 'minibuffer-complete)
                                         ; But be careful about ido, see init.el!
+
+
+;; cmake-format
+(require 'cl)  ;; required by cmake-format.
+(load "cmake-format")
+
+(use-package cmake-format
+  :init
+  ;; optional: enable automatic formatting on save
+  (add-hook 'cmake-mode-hook (lambda () (cmake-format-mode 1)))
+  ;;:config
+  ;; optional:
+  (setq cmake-format-command "/Users/hnr/Library/Python/3.8/bin/cmake-format"
+        ;;cmake-format-args '("list" "of" "flags"))
+  ))
