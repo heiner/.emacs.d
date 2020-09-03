@@ -4,8 +4,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(TeX-modes nil)
- '(blacken-executable "/usr/local/bin/black")
+ '(blacken-executable "/Users/hnr/Library/Python/3.7/bin/black")
  '(blink-cursor-mode nil)
+ '(c-basic-offset 4)
  '(c-offsets-alist (quote ((innamespace . [0]))))
  '(clang-format-executable "/usr/local/bin/clang-format")
  '(column-number-mode t)
@@ -27,7 +28,7 @@
  '(mouse-yank-at-point t)
  '(package-selected-packages
    (quote
-    (cmake-mode typescript-mode google-c-style markdown-mode clang-format)))
+    (use-package clang-format+ cmake-mode typescript-mode google-c-style markdown-mode clang-format)))
  '(pc-select-selection-keys-only t)
  '(pc-selection-mode nil)
  '(quack-default-program "mit-scheme")
