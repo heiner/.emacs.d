@@ -77,6 +77,8 @@ the compilation window did not have a frame of its own."
 (setq-default c-basic-offset 4)
 
 
+(add-hook 'js-mode-hook #'clang-format+-mode)
+
 (require 'blacken)
 (add-hook 'python-mode-hook 'blacken-mode)
 
