@@ -62,7 +62,10 @@
 
 ;; unbind `C-x C-c'
 (global-unset-key [(control x) (control c)])
-(global-unset-key "\C-z")
+(global-unset-key [(control z)])
+
+;; Don't minimize on M-m.
+(global-unset-key [?\s-m])
 
 
 ;; from http://wttools.sourceforge.net/emacs-stuff/emacs.html
