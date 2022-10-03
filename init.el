@@ -30,7 +30,8 @@
 (setq x-select-enable-primary nil)
 (setq x-select-enable-clipboard t)
 (setq select-active-regions t)
-(global-set-key [mouse-2] 'mouse-yank-primary)
+;;(global-set-key [mouse-2] 'mouse-yank-primary)
+(global-set-key (kbd "<mouse-2>") 'clipboard-yank)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -54,6 +55,7 @@
 ;; (menu-bar-mode -1)  ;; Disable menu bar
 (global-set-key [f9] 'menu-bar-mode)    ; toggles menu bar
 
+;; Typed text replaces the selection if the selection is active.
 (delete-selection-mode 1)
 
 (setq-default indent-tabs-mode nil)
@@ -187,3 +189,9 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+
+;; Useful for MacOS.
+(setq default-directory (concat (getenv "HOME") "/"))
+
+(desktop-save-mode 1)
+(setq desktop-buffers-not-to-save "^$") ;; save tramp buffers too.

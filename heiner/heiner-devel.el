@@ -72,15 +72,26 @@ the compilation window did not have a frame of its own."
 ;  (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
 ;(add-hook 'c++-mode-hook 'clang-format-on-save)
 ;(add-hook 'c-mode-hook 'clang-format-on-save)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
+;(add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook #'clang-format+-mode)
-(setq-default c-basic-offset 4)
-
+(setq-default c-basic-offset 2)
 
 (add-hook 'js-mode-hook #'clang-format+-mode)
 
+;; Fix clang-format (and clang-format+ mode) in tramp mode.
+(defun tramp-aware-clang-format (orig-fun start end &optional style assume-file-name)
+  (unless assume-file-name
+    (setq assume-file-name
+          (if (file-remote-p buffer-file-name)
+              (concat (getenv "HOME") "/" (file-name-nondirectory buffer-file-name))
+            buffer-file-name)))
+  (apply orig-fun (list start end style assume-file-name)))
+(advice-add 'clang-format-region :around #'tramp-aware-clang-format)
+
 (require 'blacken)
 (add-hook 'python-mode-hook 'blacken-mode)
+
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 (setq inferior-lisp-program "lein repl")
 
