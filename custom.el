@@ -7,6 +7,7 @@
  '(blacken-executable "/opt/homebrew/bin/black")
  '(blacken-line-length 100)
  '(blink-cursor-mode nil)
+ '(bm-buffer-persistence t)
  '(c-basic-offset 'set-from-style)
  '(c-default-style '((java-mode . "java") (awk-mode . "awk") (other . "k&r")))
  '(c-offsets-alist '((innamespace . +)))
@@ -33,7 +34,7 @@
  '(mouse-wheel-scroll-amount '(1 ((shift) . 5) ((control))))
  '(mouse-yank-at-point t)
  '(package-selected-packages
-   '(cuda-mode yaml-mode go-mode ## cython-mode dockerfile-mode use-package clang-format+ cmake-mode typescript-mode google-c-style markdown-mode clang-format))
+   '(rust-mode jenkinsfile-mode bm terraform-mode cuda-mode yaml-mode go-mode ## cython-mode dockerfile-mode use-package clang-format+ cmake-mode typescript-mode google-c-style markdown-mode clang-format))
  '(pc-select-selection-keys-only t)
  '(pc-selection-mode nil)
  '(python-indent-def-block-scale 1)
@@ -45,7 +46,9 @@
  '(show-paren-mode t)
  '(special-display-buffer-names '("*compilation*"))
  '(special-display-function 'prefer-other-frame)
+ '(tab-width 4)
  '(tool-bar-mode nil)
+ '(typescript-mode-hook '(clang-format-on-save))
  '(x-stretch-cursor nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -54,6 +57,8 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:inherit nil :stipple nil :background "ivory2" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 125 :width normal :foundry "unknown" :family "Menlo"))))
  '(bm-face ((((class color) (background light)) (:background "bisque"))))
+ '(bm-fringe-persistent-face ((t (:background "bisque"))))
+ '(bm-persistent-face ((t (:background "bisque"))))
  '(cursor ((t (:background "red3"))))
  '(paren-face-match ((t (:background "darkseagreen2"))))
  '(sh-heredoc ((t (:foreground "DodgerBlue1"))))

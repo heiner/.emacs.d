@@ -68,13 +68,14 @@ the compilation window did not have a frame of its own."
 ;(add-to-list 'load-path "~/.emacs.d/site-lisp/clojure-mode")
 ;(require 'clojure-mode)
 
-;(defun clang-format-on-save ()
-;  (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
+(defun clang-format-on-save ()
+  (add-hook 'before-save-hook #'clang-format-buffer nil 'local))
 ;(add-hook 'c++-mode-hook 'clang-format-on-save)
 ;(add-hook 'c-mode-hook 'clang-format-on-save)
 ;(add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook #'clang-format+-mode)
-(setq-default c-basic-offset 2)
+(add-hook 'typescript-mode-hook #'clang-format-on-save)
+(setq-default c-basic-offset 4)
 
 (add-hook 'js-mode-hook #'clang-format+-mode)
 
@@ -93,7 +94,11 @@ the compilation window did not have a frame of its own."
 
 (add-hook 'before-save-hook 'gofmt-before-save)
 
+(add-hook 'terraform-mode-hook #'terraform-format-on-save-mode)
+
 (setq inferior-lisp-program "lein repl")
+
+(require 'rust-mode)
 
 (defun heiner-indent-shift-left (start end &optional count)
   "Copied from python-indent-shift-left in python.el"

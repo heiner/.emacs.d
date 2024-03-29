@@ -99,6 +99,7 @@
 
 (load "latex-devel")
 (load "lilypond-devel")
+(require 'lilypond-mode)
 
 ;;(load "nxhtml/autostart.el")
 ;(require 'mediawiki)
@@ -175,6 +176,14 @@
 (global-set-key [(s down)] 'bm-forward)
 (global-set-key [(s up)] 'bm-backward)
 
+;; (add-hook 'find-file-hooks 'bm-buffer-restore)
+
+;; Protect against loss via blacken reformatting
+; (add-hook 'python-mode-hook
+;          (lambda ()
+;            (add-hook 'after-save-hook 'bm-buffer-restore)))
+
+
 (global-set-key* (kbd "M-3") (insert-and-inherit ?#))
 
 (global-set-key [(f3)] 'isearch-repeat-forward)
@@ -189,9 +198,15 @@
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+;; M-x package-refresh-contents
+;; M-x package-install
 
 ;; Useful for MacOS.
 (setq default-directory (concat (getenv "HOME") "/"))
 
+(setq exec-path (cons "/opt/homebrew/bin" exec-path))
+
 (desktop-save-mode 1)
-(setq desktop-buffers-not-to-save "^$") ;; save tramp buffers too.
+;; save tramp buffers too.
+(setq desktop-buffers-not-to-save "^$")
+(setq desktop-files-not-to-save "^$")
